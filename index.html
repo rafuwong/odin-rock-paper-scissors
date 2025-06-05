@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Rock Paper Scissors Game</h1>
+    <p>
+        Pick between rock, paper, or scissors and see if you win!
+    </p>
+    <button>Rock</button>
+    <button>Paper</button>
+    <button>Scissors</button>
+    <script>
+        let opponentsChoices = ["Rock", "Paper", "Scissors"]
+        let opponentsPickIdx = Math.floor(Math.random() * opponentsChoices.length)
+        let opponentsPick = opponentsChoices[opponentsPickIdx]
+    </script>
+</body>
+</html>
