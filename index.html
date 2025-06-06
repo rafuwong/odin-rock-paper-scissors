@@ -10,13 +10,76 @@
     <p>
         Pick between rock, paper, or scissors and see if you win!
     </p>
-    <button>Rock</button>
-    <button>Paper</button>
-    <button>Scissors</button>
+
+    <div class="guesses">
+        <button class="chooseRock">Rock</button>
+        <button class="choosePaper">Paper</button>
+        <button class="chooseScissors">Scissors</button>
+    </div>
     <script>
-        let opponentsChoices = ["Rock", "Paper", "Scissors"]
-        let opponentsPickIdx = Math.floor(Math.random() * opponentsChoices.length)
-        let opponentsPick = opponentsChoices[opponentsPickIdx]
+        function getComputerChoice() {
+            let opponentsChoices = ["R", "P", "S"];
+            let opponentsPickIdx = Math.floor(Math.random() * opponentsChoices.length);
+            return opponentsChoices[opponentsPickIdx];
+        }
+
+        function getHumanChoice() {
+            playersChoice = prompt("Enter R, P, or S")
+            return playersChoice.toUpperCase()
+        }
+
+        function playRound(cpuChoice, humChoice) { //plays a round of R,P,S and returns the winner C, H or D(raw)
+            if (cpuChoice === humChoice){
+                return `Draw! Both picked ${cpuChoice}!`
+            } else if ((cpuChoice === "R") && (humChoice === "P")) {
+                humanScore++;
+                return "You win! Paper beats rock"
+            } else if ((cpuChoice === "R") && (humChoice === "S")) {
+                computerScore++;
+                return "You lose! Scissor loses to rock"
+            } else if ((cpuChoice === "P") && (humChoice === "R")) {
+                computerScore++;
+                return "You lose! Rock loses to paper"
+            } else if ((cpuChoice === "P") && (humChoice === "S")) {
+                humanScore++;
+                return "You win! Scissor beats paper"
+            } else if ((cpuChoice === "S") && (humChoice === "R")) {
+                humanScore++;
+                return "You win! Rock beats scissors"
+            } else if ((cpuChoice === "S") && (humChoice === "P")) {
+                computerScore++;
+                return "You lose! Paper loses to scissors"
+            }
+        }
+
+        let keepPlaying = "Y";
+        let humanScore = 0;
+        let computerScore = 0;
+        while (keepPlaying === "Y") {
+            //gameNum<6 is for 5 rounds
+            for (gameNum = 1; gameNum<6; gameNum++) {
+                playRound(getComputerChoice(), getHumanChoice());
+                console.log(gameNum);
+            }
+            console.log(`${humanScore} , ${computerScore}`)
+            if (humanScore > computerScore) {
+                console.log("You win! Congratulations")
+            } else if (humanScore < computerScore) {
+                console.log("You lost!")
+            } else {
+                console.log("Match was a draw!")
+            }
+        keepPlaying = prompt("Play again Y/N?");
+        keepPlaying = keepPlaying.toUpperCase();
+         if (keepPlaying ==="Y") {
+            computerScore = 0;
+            humanScore = 0;
+         } else if (keepPlaying ==="N") {
+            console.log("Thank you for playing!")
+         }
+        }
+
+        
     </script>
 </body>
 </html>
