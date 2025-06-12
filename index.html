@@ -6,8 +6,59 @@
     <title>Document</title>
 </head>
 <body>
+
     <h1>Rock Paper Scissors Game</h1>
+    <button class="rockbutton">Rock</button>
+    <button class="paperbutton">Paper</button>
+    <button class="scissorbutton">Scissors</button>
+
+    <h3>Results</h3>
+    <div id="humScore"></div>
+    <div id="cpuScore"></div>
+
     <script>
+        
+        const rbtn = document.querySelector(".rockbutton");
+        const pbtn = document.querySelector(".paperbutton");
+        const sbtn = document.querySelector(".scissorbutton");
+        let humScore = document.querySelector("#humScore");
+        let cpuScore = document.querySelector("#cpuScore");
+
+        function updateScores() {
+            humScore.textContent = "Your Score: " + humanScore.toString();
+            cpuScore.textContent = "Computer Score: " + computerScore.toString();
+
+            if (humanScore === 5) {
+                alert("You Win!");
+                humanScore = 0;
+                computerScore = 0;
+                updateScores();
+            } else if (computerScore === 5) {
+                alert("You Lose!");
+                humanScore = 0;
+                computerScore = 0;
+                updatescores();
+            }
+        }
+
+        rbtn.addEventListener("click", () => {
+            playRound(getComputerChoice(), "R");
+            console.log("R");
+            updateScores();
+        })
+
+        pbtn.addEventListener("click", () => {
+            playRound(getComputerChoice(), "P");
+            console.log("P");
+            updateScores();
+        })
+
+        sbtn.addEventListener("click", () => {
+            playRound(getComputerChoice(), "S");
+            console.log("S");
+            updateScores(); 
+        })
+
         function getComputerChoice() {
             let opponentsChoices = ["R", "P", "S"];
             let opponentsPickIdx = Math.floor(Math.random() * opponentsChoices.length);
@@ -43,32 +94,46 @@
             }
         }
 
-        let keepPlaying = "Y";
         let humanScore = 0;
         let computerScore = 0;
-        while (keepPlaying === "Y") {
-            //gameNum<6 is for 5 rounds
-            for (gameNum = 1; gameNum<6; gameNum++) {
-                playRound(getComputerChoice(), getHumanChoice());
-                console.log(gameNum);
-            }
-            console.log(`${humanScore} , ${computerScore}`)
-            if (humanScore > computerScore) {
-                console.log("You win! Congratulations")
-            } else if (humanScore < computerScore) {
-                console.log("You lost!")
-            } else {
-                console.log("Match was a draw!")
-            }
-        keepPlaying = prompt("Play again Y/N?");
-        keepPlaying = keepPlaying.toUpperCase();
-         if (keepPlaying ==="Y") {
-            computerScore = 0;
+        updateScores()
+
+
+        
+        if (humanScore === 5) {
+            console.log("You win!");
             humanScore = 0;
-         } else if (keepPlaying ==="N") {
-            console.log("Thank you for playing!")
-         }
+            computerScore = 0;
+        }   else if (computerScore === 5) {
+            console.log("You lose!");
+            humanScore = 0;
+            computerScore = 0;
         }
+        
+
+        // while (keepPlaying === "Y") {
+        //     //gameNum<6 is for 5 rounds
+        //     for (gameNum = 1; gameNum<6; gameNum++) {
+        //         playRound(getComputerChoice(), getHumanChoice());
+        //         console.log(gameNum);
+        //     }
+        //     console.log(`${humanScore} , ${computerScore}`)
+        //     if (humanScore > computerScore) {
+        //         console.log("You win! Congratulations")
+        //     } else if (humanScore < computerScore) {
+        //         console.log("You lost!")
+        //     } else {
+        //         console.log("Match was a draw!")
+        //     }
+        // keepPlaying = prompt("Play again Y/N?");
+        // keepPlaying = keepPlaying.toUpperCase();
+        //  if (keepPlaying ==="Y") {
+        //     computerScore = 0;
+        //     humanScore = 0;
+        //  } else if (keepPlaying ==="N") {
+        //     console.log("Thank you for playing!")
+        //  }
+        // }
 
         
     </script>
